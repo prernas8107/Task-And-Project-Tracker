@@ -1,9 +1,10 @@
-﻿import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect, useCallback } from 'react';
 import Navbar from './components/Navbar';
 import DashboardCards from './components/DashboardCards';
 import FilterBar from './components/FilterBar';
 import TaskList from './components/TaskList';
 import TaskModal from './components/TaskModal';
+import Toast from './components/Toast';
 import { fetchTasks, fetchStats, createTask, updateTask, deleteTask } from './services/api';
 
 export default function App() {
@@ -14,6 +15,16 @@ export default function App() {
   const [editingTask, setEditingTask] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [toasts, setToasts] = useState([]);
+
+  const addToast = useCallback((message, type = 'success') => {
+    const id = Date.now();
+    setToasts((prev) => [...prev, { id, message, type }]);
+  }, []);
+
+  const removeToast = useCallback((id) => {
+    setToasts((prev) => prev.filter((t) => t.id !== id));
+  }, []);
 
   const loadData = async () => {
     setLoading(true);
@@ -41,14 +52,17 @@ export default function App() {
     try {
       if (editingTask) {
         await updateTask(editingTask._id, formData);
+        addToast('Task updated successfully!', 'success');
       } else {
         await createTask(formData);
+        addToast('Task created successfully!', 'success');
       }
       setIsModalOpen(false);
       setEditingTask(null);
       loadData();
     } catch (err) {
       console.error('Save failed:', err);
+      addToast('Failed to save task. Please try again.', 'error');
     }
   };
 
@@ -56,9 +70,11 @@ export default function App() {
     if (window.confirm('Are you sure you want to delete this task?')) {
       try {
         await deleteTask(id);
+        addToast('Task deleted successfully!', 'success');
         loadData();
       } catch (err) {
         console.error('Delete failed:', err);
+        addToast('Failed to delete task. Please try again.', 'error');
       }
     }
   };
@@ -66,9 +82,11 @@ export default function App() {
   const handleStatusChange = async (id, newStatus) => {
     try {
       await updateTask(id, { status: newStatus });
+      addToast(`Status updated to "${newStatus}"`, 'info');
       loadData();
     } catch (err) {
       console.error('Status update failed:', err);
+      addToast('Failed to update status.', 'error');
     }
   };
 
@@ -126,6 +144,8 @@ export default function App() {
         onSave={handleCreateOrUpdate}
         editingTask={editingTask}
       />
+
+      <Toast toasts={toasts} removeToast={removeToast} />
     </div>
   );
 }

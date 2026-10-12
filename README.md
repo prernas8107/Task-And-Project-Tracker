@@ -2,23 +2,24 @@
 
 A modern full-stack Task and Project Management application built with MongoDB, Express.js, React.js, and Node.js.
 
-## 🚀 Key Features
+## Key Features
 - **Full CRUD Operations**: Create, view, edit, and delete tasks seamlessly.
 - **Priority & Status Management**: Priorities (Low, Medium, High) and Statuses (Pending, In Progress, Completed).
 - **Live Dashboard Cards**: Instant metrics showing Total Tasks, In Progress, Completed, and Overdue tasks.
 - **Search & Multi-Filtering**: Search across titles/descriptions/projects, filter by priority and status, and sort by deadline.
 - **Form Validation**: Real-time error messages and required field checks.
-- **Loading State**: Spinner shown while data is being fetched from the server.
-- **Responsive & Modern UI**: Built with a sleek dark theme, responsive grid, and smooth interactive elements.
+- **Toast Notifications**: Interactive feedback toasts for task creation, updates, and deletion.
+- **Loading State & Error Handling**: Animated loading spinner during API fetches and clean error alerts.
+- **Responsive & Modern UI**: Built with a sleek dark glassmorphism theme, responsive grid, and smooth interactive elements.
 
-## 🛠️ Tech Stack
+## Tech Stack
 - **Frontend**: React.js (Functional Components, Hooks), Vite, Lucide Icons, Axios, Vanilla CSS
 - **Backend**: Node.js, Express.js, RESTful APIs
 - **Database**: MongoDB with Mongoose ODM (supports both local and MongoDB Atlas)
 
 ---
 
-## 📦 Setup & Installation Instructions
+## Setup & Installation Instructions
 
 ### 1. Prerequisites
 - Node.js (v18 or higher)
@@ -37,20 +38,20 @@ cd server
 npm install
 ```
 
-Create a `.env` file in the `server/` folder.
+Create a `.env` file in the `server/` folder:
 
-**Option A — Local MongoDB:**
+**Option A - Local MongoDB:**
 ```env
 PORT=5000
 MONGO_URI=mongodb://127.0.0.1:27017/taskProjectTracker
 ```
 
-**Option B — MongoDB Atlas (Recommended):**
+**Option B - MongoDB Atlas (Recommended):**
 ```env
 PORT=5000
 MONGO_URI=mongodb+srv://<username>:<password>@cluster0.xxxxx.mongodb.net/taskProjectTracker?appName=Cluster0
 ```
-> ⚠️ Replace `<username>` and `<password>` with your Atlas credentials. Make sure your IP is whitelisted in Atlas Network Access (or use `0.0.0.0/0` to allow all).
+> Note: Replace `<username>` and `<password>` with your Atlas credentials. Make sure your IP is whitelisted in Atlas Network Access (or use `0.0.0.0/0` to allow all).
 
 Start the backend server:
 ```bash
@@ -69,7 +70,7 @@ npm run dev
 
 ---
 
-## 📡 API Endpoints
+## API Endpoints
 
 | Method | Endpoint | Description |
 |---|---|---|
@@ -82,5 +83,5 @@ npm run dev
 
 ---
 
-## 📝 Project Explanation (Summary)
-This Task & Project Tracker was developed using the MERN stack with a clean, decoupled modular architecture. The backend is powered by Node.js and Express.js with Mongoose schemas that enforce strict data validation, providing RESTful endpoints for CRUD operations, live dashboard metrics (including dynamic overdue calculation), and multi-criteria querying. The frontend is built in React using functional components and hooks (`useState`, `useEffect`) for state management, modal dialogs, loading states, and validation feedback. If given more time, I would incorporate user authentication with JWT, drag-and-drop Kanban view, and automated email reminders for approaching deadlines.
+## Project Explanation (Summary)
+This Task & Project Tracker was developed using the MERN stack with a clean, decoupled modular architecture. The backend is powered by Node.js and Express.js with Mongoose schemas that enforce strict data validation, providing RESTful endpoints for CRUD operations, live dashboard metrics (including dynamic overdue calculation), and multi-criteria querying. The frontend is built in React using functional components and hooks (`useState`, `useEffect`, `useCallback`) for state management, modal dialogs, loading states, real-time toast feedback, and validation. If given more time, future roadmap items would include user authentication with JWT, drag-and-drop Kanban view, pagination for large datasets, and automated email reminders for approaching deadlines.
