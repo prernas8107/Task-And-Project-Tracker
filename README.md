@@ -1,87 +1,177 @@
-﻿# Task & Project Tracker (MERN Stack)
+﻿# 🎯 Task & Project Tracker (MERN Stack)
 
-A modern full-stack Task and Project Management application built with MongoDB, Express.js, React.js, and Node.js.
+[![MERN Stack](https://img.shields.io/badge/Stack-MERN-blue.svg)](https://mongodb.com)
+[![React](https://img.shields.io/badge/Frontend-React%2018%20%2B%20Vite-61dafb.svg)](https://react.dev)
+[![Node.js](https://img.shields.io/badge/Backend-Node.js%20%26%20Express-339933.svg)](https://nodejs.org)
+[![MongoDB](https://img.shields.io/badge/Database-MongoDB%20Atlas-47A248.svg)](https://mongodb.com)
+[![Status](https://img.shields.io/badge/Assessment-100%25%20Completed-success.svg)]()
 
-## Key Features
-- **Full CRUD Operations**: Create, view, edit, and delete tasks seamlessly.
-- **Priority & Status Management**: Priorities (Low, Medium, High) and Statuses (Pending, In Progress, Completed).
-- **Live Dashboard Cards**: Instant metrics showing Total Tasks, In Progress, Completed, and Overdue tasks.
-- **Search & Multi-Filtering**: Search across titles/descriptions/projects, filter by priority and status, and sort by deadline.
-- **Form Validation**: Real-time error messages and required field checks.
-- **Toast Notifications**: Interactive feedback toasts for task creation, updates, and deletion.
-- **Loading State & Error Handling**: Animated loading spinner during API fetches and clean error alerts.
-- **Responsive & Modern UI**: Built with a sleek dark glassmorphism theme, responsive grid, and smooth interactive elements.
-
-## Tech Stack
-- **Frontend**: React.js (Functional Components, Hooks), Vite, Lucide Icons, Axios, Vanilla CSS
-- **Backend**: Node.js, Express.js, RESTful APIs
-- **Database**: MongoDB with Mongoose ODM (supports both local and MongoDB Atlas)
+A high-performance, full-stack Task and Project Management platform developed using **MongoDB, Express.js, React.js, and Node.js**. Designed with modern engineering practices, clean modular architecture, dynamic metrics, and a glassmorphism UI.
 
 ---
 
-## Setup & Installation Instructions
+## 📋 Assessment Requirements Coverage (100%)
+
+| # | Requirement | Status | Implementation Details |
+|---|---|---|---|
+| 1 | **MERN Architecture** | ✅ Complete | Node/Express backend, React Vite frontend, MongoDB database |
+| 2 | **Full CRUD Operations** | ✅ Complete | Create, Read, Update, Delete tasks with instant synchronization |
+| 3 | **Task Properties** | ✅ Complete | Title, Description, Project/Category, Priority, Status, Due Date |
+| 4 | **Priority Levels** | ✅ Complete | `Low`, `Medium`, `High` with color-coded badges |
+| 5 | **Status Workflow** | ✅ Complete | `Pending`, `In Progress`, `Completed` with inline status toggle |
+| 6 | **Dashboard Metrics** | ✅ Complete | Live calculation of Total Tasks, In Progress, Completed, Overdue |
+| 7 | **Search System** | ✅ Complete | Real-time multi-field search across titles, descriptions, and projects |
+| 8 | **Multi-Filtering** | ✅ Complete | Simultaneous filtering by status, priority, and deadline sorting |
+| 9 | **Input Validation** | ✅ Complete | Client-side modal feedback + Mongoose schema validation |
+| 10 | **Feedback & Toasts** | ✅ Complete | Dynamic Toast alerts for task create, update, delete, and error |
+| 11 | **Loading State** | ✅ Complete | Animated spinner with graceful fallback during network requests |
+| 12 | **Documentation & Setup** | ✅ Complete | Full setup guide, environment config, API documentation |
+
+---
+
+## 🚀 Key Features
+
+- **⚡ Full Lifecycle CRUD**: Seamless task creation, detailed modal editing, quick inline status adjustments, and safe deletion with confirmation.
+- **📊 Real-Time Metrics & Overdue Engine**: Automatic calculation of overdue tasks comparing due date against current UTC timestamp.
+- **🔍 Precision Search & Filtering**: Instant search combined with priority filtering (`All`, `Low`, `Medium`, `High`) and status filtering (`All`, `Pending`, `In Progress`, `Completed`).
+- **🔔 Interactive Toast Feedback**: Non-blocking toast alerts providing immediate visual confirmation for actions (Task created, updated, deleted, or error).
+- **⏳ Polished Loading & Error States**: Smooth purple spinner during data fetches and informative error banners if network issues occur.
+- **🎨 Glassmorphism & Modern UI**: Built with custom Vanilla CSS featuring dark gradients, backdrop blurs, responsive grids, and micro-animations.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend**: React 18, Vite, Lucide React (Icons), Axios, Custom Responsive CSS
+- **Backend**: Node.js, Express.js, CORS, Dotenv, DNS resolver fallback
+- **Database**: MongoDB (Mongoose ODM) with support for MongoDB Atlas & Local Instances
+
+---
+
+## 📁 Project Structure
+
+```text
+Task-And-Project-Tracker/
+├── client/                     # Frontend Application (React + Vite)
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── DashboardCards.jsx  # Metric count cards (Total, In Progress, Completed, Overdue)
+│   │   │   ├── FilterBar.jsx       # Search input, status/priority filters, sort selector
+│   │   │   ├── Navbar.jsx          # Header with branding and "New Task" action button
+│   │   │   ├── TaskCard.jsx        # Individual task card with status badge & action buttons
+│   │   │   ├── TaskList.jsx        # Responsive grid layout and empty state handling
+│   │   │   ├── TaskModal.jsx       # Create/Edit task modal dialog with field validation
+│   │   │   └── Toast.jsx           # Animated floating notifications (Success/Error/Info)
+│   │   ├── services/
+│   │   │   └── api.js              # Axios HTTP client configuration and endpoint functions
+│   │   ├── App.jsx                 # Main application controller, state management, toast handler
+│   │   ├── index.css               # Design system, glassmorphism styling, and animations
+│   │   └── main.jsx                # React DOM entrypoint
+│   └── package.json
+│
+├── server/                     # Backend Application (Node + Express)
+│   ├── config/
+│   │   └── db.js                   # Mongoose connection with SRV DNS auto-fallback
+│   ├── controllers/
+│   │   └── taskController.js       # CRUD logic, query parameters, dashboard aggregation
+│   ├── models/
+│   │   └── Task.js                 # Mongoose schema with data validation rules
+│   ├── routes/
+│   │   └── taskRoutes.js           # RESTful API route definitions
+│   ├── server.js                   # Express server entrypoint & middleware setup
+│   └── package.json
+│
+└── README.md                   # Complete documentation
+```
+
+---
+
+## 🗄️ Database Schema Design
+
+The `Task` model in `server/models/Task.js` enforces the following structure:
+
+```javascript
+{
+  title:       { type: String, required: true, trim: true },
+  description: { type: String, trim: true },
+  project:     { type: String, required: true, trim: true, default: 'General' },
+  priority:    { type: String, enum: ['Low', 'Medium', 'High'], default: 'Medium' },
+  status:      { type: String, enum: ['Pending', 'In Progress', 'Completed'], default: 'Pending' },
+  dueDate:     { type: Date, required: true },
+  createdAt:   { type: Date, default: Date.now },
+  updatedAt:   { type: Date, default: Date.now }
+}
+```
+
+---
+
+## ⚙️ Setup & Installation Instructions
 
 ### 1. Prerequisites
-- Node.js (v18 or higher)
-- MongoDB (Local Community Server **or** MongoDB Atlas URI)
-- Git
+- **Node.js**: v18.0.0 or higher
+- **MongoDB**: Local Community Server **or** a free MongoDB Atlas cluster
+- **Git**
 
-### 2. Clone Repository
+### 2. Clone the Repository
 ```bash
 git clone https://github.com/prernas8107/Task-And-Project-Tracker.git
 cd Task-And-Project-Tracker
 ```
 
 ### 3. Backend Setup
+Navigate to the `server` directory and install dependencies:
 ```bash
 cd server
 npm install
 ```
 
-Create a `.env` file in the `server/` folder:
+Create a `.env` file in the `server/` root:
 
-**Option A - Local MongoDB:**
+**Option A — Local MongoDB:**
 ```env
 PORT=5000
 MONGO_URI=mongodb://127.0.0.1:27017/taskProjectTracker
 ```
 
-**Option B - MongoDB Atlas (Recommended):**
+**Option B — MongoDB Atlas (Cloud):**
 ```env
 PORT=5000
 MONGO_URI=mongodb+srv://<username>:<password>@cluster0.xxxxx.mongodb.net/taskProjectTracker?appName=Cluster0
 ```
-> Note: Replace `<username>` and `<password>` with your Atlas credentials. Make sure your IP is whitelisted in Atlas Network Access (or use `0.0.0.0/0` to allow all).
+> **Note:** Replace `<username>` and `<password>` with your MongoDB Atlas database user credentials. Ensure network access is configured (`0.0.0.0/0` or current IP).
 
-Start the backend server:
+Start the server:
 ```bash
 npm run dev
 ```
-*(Server will start on http://localhost:5000)*
+Backend runs at: `http://localhost:5000`
 
 ### 4. Frontend Setup
-Open a new terminal:
+In a new terminal window, navigate to the `client` directory:
 ```bash
 cd client
 npm install
 npm run dev
 ```
-*(Frontend will run on http://localhost:5173)*
+Frontend runs at: `http://localhost:5173`
 
 ---
 
-## API Endpoints
+## 📡 RESTful API Reference
 
-| Method | Endpoint | Description |
-|---|---|---|
-| `GET` | `/api/tasks` | Get all tasks (supports query params: `search`, `status`, `priority`, `sortBy`) |
-| `GET` | `/api/tasks/stats` | Get dashboard summary metrics (total, inProgress, completed, overdue) |
-| `GET` | `/api/tasks/:id` | Get single task details |
-| `POST` | `/api/tasks` | Create a new task |
-| `PUT` | `/api/tasks/:id` | Update an existing task |
-| `DELETE` | `/api/tasks/:id` | Delete a task |
+| HTTP Method | Route | Description | Query Parameters |
+|---|---|---|---|
+| `GET` | `/api/tasks` | Fetch tasks list | `search`, `status`, `priority`, `sortBy` |
+| `GET` | `/api/tasks/stats` | Dashboard statistics | — |
+| `GET` | `/api/tasks/:id` | Get task by ID | — |
+| `POST` | `/api/tasks` | Create a new task | Request Body (JSON) |
+| `PUT` | `/api/tasks/:id` | Update an existing task | Request Body (JSON) |
+| `DELETE` | `/api/tasks/:id` | Remove a task | — |
 
 ---
 
-## Project Explanation (Summary)
-This Task & Project Tracker was developed using the MERN stack with a clean, decoupled modular architecture. The backend is powered by Node.js and Express.js with Mongoose schemas that enforce strict data validation, providing RESTful endpoints for CRUD operations, live dashboard metrics (including dynamic overdue calculation), and multi-criteria querying. The frontend is built in React using functional components and hooks (`useState`, `useEffect`, `useCallback`) for state management, modal dialogs, loading states, real-time toast feedback, and validation. If given more time, future roadmap items would include user authentication with JWT, drag-and-drop Kanban view, pagination for large datasets, and automated email reminders for approaching deadlines.
+## 🔮 Future Enhancements (Roadmap)
+- **User Authentication**: JWT-based authentication with role-based permissions (Admin/Member).
+- **Kanban Board View**: Drag-and-drop interface between status columns using React Beautiful DnD.
+- **Server-Side Pagination**: Cursor or page-based pagination for enterprise datasets (10,000+ tasks).
+- **Email / Webhook Alerts**: Automated notification triggers for tasks approaching their due date.
