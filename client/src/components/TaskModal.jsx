@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
 
 export default function TaskModal({ isOpen, onClose, onSave, editingTask }) {
@@ -90,12 +90,18 @@ export default function TaskModal({ isOpen, onClose, onSave, editingTask }) {
 
             <div className="form-group">
               <label>Project / Category</label>
-              <input
-                type="text"
+              <select
                 value={formData.project}
                 onChange={(e) => setFormData({ ...formData, project: e.target.value })}
-                placeholder="e.g. Backend"
-              />
+              >
+                <option value="General">General</option>
+                <option value="Frontend">Frontend</option>
+                <option value="Backend">Backend</option>
+                <option value="UI/UX Design">UI/UX Design</option>
+                <option value="Database">Database</option>
+                <option value="QA & Testing">QA & Testing</option>
+                <option value="DevOps">DevOps</option>
+              </select>
             </div>
           </div>
 
