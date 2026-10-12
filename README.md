@@ -23,7 +23,7 @@ Task & Project Tracker is a productivity web application designed to help teams 
 ## Project Explanation
 
 This application is built using a decoupled MERN stack architecture with strict separation of concerns between client and server:
-- **Approach:** Focused on clean component composition, predictable state management via React Hooks (useState, useEffect, useCallback), and resilient database operations.
+- **Approach:** Focused on clean component composition, predictable state management via React Hooks, and resilient database operations.
 - **Component Structure:** Organized into modular components (Navbar, DashboardCards, FilterBar, TaskList, TaskCard, TaskModal, Toast) orchestrated by App.jsx and connected through a centralized API service layer (services/api.js).
 - **API & Database Implementation:** RESTful endpoints built with Express routes and controllers, paired with a Mongoose schema enforcing strict data validation and a dynamic overdue calculation engine.
 - **Future Improvements:** With additional time, I would incorporate JWT-based user authentication and role-based permissions (RBAC) to support multi-tenant team workspaces.
@@ -190,3 +190,4 @@ Base URL: http://localhost:5000/api/tasks
   }
 }
 ```
+
