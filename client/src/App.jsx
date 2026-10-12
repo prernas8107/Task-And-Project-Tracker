@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import DashboardCards from './components/DashboardCards';
 import FilterBar from './components/FilterBar';
@@ -12,8 +12,12 @@ export default function App() {
   const [filters, setFilters] = useState({ search: '', status: 'All', priority: 'All', sortBy: '' });
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingTask, setEditingTask] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const loadData = async () => {
+    setLoading(true);
+    setError(null);
     try {
       const [tasksRes, statsRes] = await Promise.all([
         fetchTasks(filters),
@@ -23,6 +27,9 @@ export default function App() {
       setStats(statsRes.data.data);
     } catch (error) {
       console.error('Error fetching data:', error);
+      setError('Unable to connect to the server. Please make sure the backend is running.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -77,15 +84,37 @@ export default function App() {
       <div className="container">
         <DashboardCards stats={stats} />
         <FilterBar filters={filters} setFilters={setFilters} />
-        <TaskList
-          tasks={tasks}
-          onEdit={(task) => {
-            setEditingTask(task);
-            setIsModalOpen(true);
-          }}
-          onDelete={handleDelete}
-          onStatusChange={handleStatusChange}
-        />
+
+        {error && (
+          <div style={{
+            background: 'rgba(248, 113, 113, 0.1)',
+            border: '1px solid #f87171',
+            color: '#f87171',
+            padding: '12px 20px',
+            borderRadius: '10px',
+            marginBottom: '16px',
+            fontSize: '0.9rem'
+          }}>
+            ⚠️ {error}
+          </div>
+        )}
+
+        {loading ? (
+          <div style={{ textAlign: 'center', padding: '60px 0' }}>
+            <div className="spinner"></div>
+            <p style={{ color: '#64748b', marginTop: '16px', fontSize: '0.95rem' }}>Loading tasks...</p>
+          </div>
+        ) : (
+          <TaskList
+            tasks={tasks}
+            onEdit={(task) => {
+              setEditingTask(task);
+              setIsModalOpen(true);
+            }}
+            onDelete={handleDelete}
+            onStatusChange={handleStatusChange}
+          />
+        )}
       </div>
 
       <TaskModal
