@@ -7,7 +7,7 @@
 
 ---
 
-## 📌 Project Overview
+## Project Overview
 
 Task & Project Tracker is a full-stack productivity web application designed to help teams and individuals organize tasks, manage deadlines, and track project status in real time. 
 
@@ -15,7 +15,7 @@ Built with the MERN stack (MongoDB, Express, React, Node.js), the application fe
 
 ---
 
-## 🚀 Features Implemented
+##  Features Implemented
 
 ### 1. Task & Project Management (CRUD)
 - **Create Tasks:** Modal form with title, detailed description, project/category selection, priority level, status, and deadline.
@@ -46,7 +46,7 @@ Built with the MERN stack (MongoDB, Express, React, Node.js), the application fe
 
 ---
 
-## 🛠️ Tech Stack & Architecture
+##  Tech Stack & Architecture
 
 ### Frontend (`/client`)
 - **React.js 18 (Vite):** Functional components and React Hooks (`useState`, `useEffect`, `useCallback`) for clean state management.
@@ -62,7 +62,7 @@ Built with the MERN stack (MongoDB, Express, React, Node.js), the application fe
 
 ---
 
-## 📂 Project Directory Structure
+##  Project Directory Structure
 
 ```text
 Task-And-Project-Tracker/
@@ -105,7 +105,7 @@ Task-And-Project-Tracker/
 
 ---
 
-## 🗄️ Database Schema (`Task.js`)
+##  Database Schema (`Task.js`)
 
 ```javascript
 {
@@ -146,7 +146,7 @@ Task-And-Project-Tracker/
 
 ---
 
-## ⚙️ Installation & Setup Guide
+##  Installation & Setup Guide
 
 ### 1. Prerequisites
 - **Node.js** (v18.0.0 or higher recommended)
@@ -203,7 +203,7 @@ cd Task-And-Project-Tracker
 
 ---
 
-## 📡 RESTful API Reference
+##  RESTful API Reference
 
 Base URL: `http://localhost:5000/api/tasks`
 
@@ -244,7 +244,7 @@ Base URL: `http://localhost:5000/api/tasks`
 
 ---
 
-## 💡 Engineering Decisions & Challenges Handled
+##  Decisions & Challenges Handled
 
 1. **MongoDB Atlas SRV DNS Resolution:**
    - On certain Windows networks and local ISP configurations, Node.js `dns.promises.resolveSrv` encounters `ECONNREFUSED` when querying MongoDB Atlas SRV records.
@@ -262,8 +262,7 @@ Base URL: `http://localhost:5000/api/tasks`
 
 ---
 
-## 🔮 Future Roadmap (Production Scalability)
+## Future Roadmap (Production Scalability)
 - **User Authentication & RBAC:** JWT-based login/signup with individual user data isolation.
-- **Kanban Board View:** Drag-and-drop column workflow between Pending, In Progress, and Completed states.
 - **Pagination:** Cursor/offset-based server pagination for handling large datasets (10,000+ tasks).
 - **Automated Deadline Notifications:** Background cron job sending email reminders 24 hours before deadlines.
