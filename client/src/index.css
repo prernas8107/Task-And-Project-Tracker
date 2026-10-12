@@ -21,10 +21,13 @@
   box-sizing: border-box;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   letter-spacing: -0.012em;
+  -webkit-tap-highlight-color: transparent;
 }
 
-button, input, select, textarea {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -38,10 +41,15 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+button, input, select, textarea {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
 .container {
   max-width: 1280px;
   margin: 0 auto;
   padding: 28px 24px 60px;
+  width: 100%;
 }
 
 /* ===== Navbar ===== */
@@ -56,6 +64,7 @@ body {
   position: sticky;
   top: 0;
   z-index: 50;
+  width: 100%;
 }
 
 .logo-container {
@@ -73,6 +82,7 @@ body {
   align-items: center;
   justify-content: center;
   box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35);
+  flex-shrink: 0;
 }
 
 .logo-text {
@@ -80,6 +90,7 @@ body {
   font-weight: 800;
   letter-spacing: -0.4px;
   color: var(--text-main);
+  white-space: nowrap;
 }
 
 .btn-primary {
@@ -93,14 +104,21 @@ body {
   cursor: pointer;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   box-shadow: 0 4px 16px rgba(99, 102, 241, 0.3);
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 22px rgba(99, 102, 241, 0.45);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
 }
 
 /* ===== Dashboard Stats Cards ===== */
@@ -109,6 +127,7 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
   gap: 18px;
   margin: 28px 0;
+  width: 100%;
 }
 
 .stat-card {
@@ -123,17 +142,6 @@ body {
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   overflow: hidden;
-}
-
-.stat-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: transparent;
-  transition: background 0.25s ease;
 }
 
 .stat-card:hover {
@@ -167,6 +175,7 @@ body {
   align-items: center;
   justify-content: center;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  flex-shrink: 0;
 }
 
 /* ===== Filter Bar ===== */
@@ -181,6 +190,7 @@ body {
   margin-bottom: 28px;
   align-items: center;
   box-shadow: var(--shadow-sm);
+  width: 100%;
 }
 
 .search-input {
@@ -194,6 +204,8 @@ body {
   font-size: 0.92rem;
   outline: none;
   transition: all 0.2s ease;
+  width: 100%;
+  -webkit-appearance: none;
 }
 
 .search-input::placeholder {
@@ -217,10 +229,16 @@ body {
   outline: none;
   cursor: pointer;
   transition: all 0.2s ease;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 14px;
+  padding-right: 36px;
 }
 
 .select-filter:focus {
-  background: #ffffff;
+  background-color: #ffffff;
   border-color: var(--accent-primary);
   box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12);
 }
@@ -228,8 +246,9 @@ body {
 /* ===== Tasks Grid ===== */
 .tasks-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
   gap: 22px;
+  width: 100%;
 }
 
 .task-card {
@@ -243,6 +262,8 @@ body {
   box-shadow: var(--shadow-sm);
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   color: var(--text-main);
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .task-card:hover {
@@ -268,6 +289,14 @@ body {
 .task-card > div:last-child > div:last-child {
   border-top-color: #f1f5f9 !important;
   padding-top: 14px !important;
+}
+
+.task-card button {
+  min-height: 36px;
+  min-width: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .task-card button[title="Edit Task"] {
@@ -303,6 +332,7 @@ body {
   letter-spacing: 0.1px;
   display: inline-flex;
   align-items: center;
+  white-space: nowrap;
 }
 
 /* Priority Badges */
@@ -347,12 +377,13 @@ body {
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(15, 23, 42, 0.45);
+  background: rgba(15, 23, 42, 0.5);
   backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 100;
+  z-index: 1000;
   padding: 16px;
 }
 
@@ -361,10 +392,19 @@ body {
   border: 1px solid #e2e8f0;
   width: 100%;
   max-width: 520px;
+  max-height: 90vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   border-radius: 22px;
   padding: 30px;
-  box-shadow: 0 25px 60px rgba(15, 23, 42, 0.15);
+  box-shadow: 0 25px 60px rgba(15, 23, 42, 0.18);
   color: var(--text-main);
+  animation: modalPop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modalPop {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
 }
 
 .modal-content h3 {
@@ -397,6 +437,15 @@ body {
   font-size: 0.92rem;
   outline: none;
   transition: all 0.2s ease;
+  -webkit-appearance: none;
+}
+
+.form-group select {
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 14px;
+  padding-right: 36px;
 }
 
 .form-group input:focus,
@@ -415,6 +464,7 @@ body {
   border-radius: 10px !important;
   font-weight: 600 !important;
   transition: all 0.2s ease !important;
+  cursor: pointer;
 }
 
 .modal-content button[type="button"]:hover {
@@ -470,3 +520,275 @@ body {
   to   { opacity: 1; transform: translateX(0); }
 }
 
+/* ========================================================
+   📱 RESPONSIVE DESIGN & MOBILE / TABLET / iOS BREAKPOINTS
+   ======================================================== */
+
+/* Tablet & Smaller Screens (<= 992px) */
+@media (max-width: 992px) {
+  .navbar {
+    padding: 14px 24px;
+  }
+  
+  .container {
+    padding: 22px 18px 48px;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin: 20px 0;
+  }
+
+  .tasks-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+}
+
+/* Tablets (<= 768px) */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 14px 18px;
+  }
+
+  .logo-text {
+    font-size: 1.15rem;
+  }
+
+  .logo-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+  }
+
+  .btn-primary {
+    padding: 9px 18px;
+    font-size: 0.88rem;
+    border-radius: 10px;
+  }
+
+  .container {
+    padding: 18px 14px 40px;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin: 18px 0;
+  }
+
+  /* 5th stat card (Overdue) takes full width on 2-col layout */
+  .stats-grid > .stat-card:last-child {
+    grid-column: span 2;
+  }
+
+  .stat-card {
+    padding: 18px 16px;
+    border-radius: 16px;
+  }
+
+  .stat-value {
+    font-size: 1.85rem;
+  }
+
+  .filter-bar {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 14px 14px;
+    gap: 10px;
+    margin-bottom: 20px;
+    border-radius: 16px;
+  }
+
+  .search-input {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .select-filter {
+    width: 100%;
+  }
+
+  .tasks-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .task-card {
+    padding: 20px 18px;
+    border-radius: 16px;
+  }
+}
+
+/* Mobile Phones & iOS Safari (<= 540px) */
+@media (max-width: 540px) {
+  /* Prevent iOS Safari auto-zoom on input focus by setting 16px font-size */
+  input, select, textarea {
+    font-size: 16px !important;
+  }
+
+  .navbar {
+    padding: 12px 14px;
+  }
+
+  .logo-container {
+    gap: 8px;
+  }
+
+  .logo-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+  }
+
+  .logo-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .logo-text {
+    font-size: 1.05rem;
+  }
+
+  .btn-primary {
+    padding: 8px 14px;
+    font-size: 0.82rem;
+    gap: 5px;
+    border-radius: 9px;
+  }
+
+  .container {
+    padding: 14px 10px 36px;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    margin: 14px 0;
+  }
+
+  .stats-grid > .stat-card:last-child {
+    grid-column: span 2;
+  }
+
+  .stat-card {
+    padding: 14px 12px;
+    border-radius: 14px;
+  }
+
+  .stat-title {
+    font-size: 0.74rem;
+  }
+
+  .stat-value {
+    font-size: 1.55rem;
+    margin-top: 4px;
+  }
+
+  .stat-icon-wrapper {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+  }
+
+  .stat-icon-wrapper svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .filter-bar {
+    padding: 12px 10px;
+    gap: 8px;
+    border-radius: 14px;
+  }
+
+  .search-input {
+    padding: 10px 14px;
+    font-size: 16px !important;
+  }
+
+  .select-filter {
+    padding: 10px 14px;
+    font-size: 16px !important;
+  }
+
+  .tasks-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .task-card {
+    padding: 16px 14px;
+    border-radius: 14px;
+  }
+
+  .task-card h4 {
+    font-size: 1.05rem;
+  }
+
+  .task-card p {
+    font-size: 0.84rem;
+  }
+
+  /* Modal Responsiveness on Mobile: Stack 2-column form grids into 1 column */
+  .modal-overlay {
+    padding: 10px;
+    align-items: flex-end; /* Mobile bottom-sheet style or centered */
+  }
+
+  .modal-content {
+    max-width: 100%;
+    width: 100%;
+    max-height: 85vh;
+    padding: 20px 16px;
+    border-radius: 20px 20px 16px 16px;
+  }
+
+  .modal-content h3 {
+    font-size: 1.15rem;
+  }
+
+  /* Target inline grid rows in TaskModal.jsx so they stack neatly on mobile */
+  .modal-content form > div[style*="grid"] {
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
+  }
+
+  .form-group {
+    margin-bottom: 14px;
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    padding: 10px 12px;
+    font-size: 16px !important;
+    border-radius: 10px;
+  }
+
+  /* Toast floating responsiveness on mobile */
+  .toast-item {
+    min-width: 0 !important;
+    max-width: calc(100vw - 32px) !important;
+    width: calc(100vw - 32px) !important;
+    font-size: 0.84rem;
+    padding: 12px 14px;
+    border-radius: 10px;
+  }
+}
+
+/* Extra Small Phones (iPhone SE / <= 360px) */
+@media (max-width: 360px) {
+  .logo-text {
+    font-size: 0.95rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-grid > .stat-card:last-child {
+    grid-column: span 1;
+  }
+}
